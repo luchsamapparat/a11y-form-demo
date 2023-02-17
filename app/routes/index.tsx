@@ -43,19 +43,28 @@ export default function Index() {
       <p>Please fill out all form fields to complete your registration.</p>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.firstName })}>
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName">
+          First Name
+          <div className="hint">Required</div>
+        </label>
         <input type="text" name="firstName" id="firstName" value={registrationForm.firstName ?? ''} onChange={onChangeHandler('firstName')} />
         <div className="feedback">{fieldErrors?.firstName}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.lastName })}>
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="lastName">
+          Last Name
+          <div className="hint">Required</div>
+        </label>
         <input type="text" name="lastName" id="lastName" value={registrationForm.lastName ?? ''} onChange={onChangeHandler('lastName')} />
         <div className="feedback">{fieldErrors?.lastName}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.email })}>
-        <label htmlFor="email">Email Address</label>
+        <label htmlFor="email">
+          Email Address
+          <div className="hint">Required</div>
+        </label>
         <input type="email" name="email" id="email" value={registrationForm.email ?? ''} onChange={onChangeHandler('email')} />
         <div className="feedback">{fieldErrors?.email}</div>
       </div>
