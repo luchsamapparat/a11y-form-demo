@@ -4,6 +4,7 @@ import { useFetcher } from "@remix-run/react";
 import classNames from "classnames";
 import { PaperPlaneTilt, Trash } from "phosphor-react";
 import type { FormEvent } from "react";
+import { useId } from "react";
 import type { ValidationErrorResponseData } from 'remix-validated-form';
 import { validationError } from 'remix-validated-form';
 import { useFormState } from "~/form";
@@ -33,9 +34,11 @@ export default function Index() {
     submit(registrationForm, { method: 'post' });
   };
 
+  const headingId = useId();
+
   return (<>
-    <form onReset={handleReset} onSubmit={handleSubmit}>
-      <h1>Register</h1>
+    <form aria-labelledby={headingId} onReset={handleReset} onSubmit={handleSubmit}>
+      <h1 id={headingId}>Register</h1>
 
       <p>Please fill out all form fields to complete your registration.</p>
 
