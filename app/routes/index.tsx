@@ -60,13 +60,13 @@ export default function Index() {
       </div>
 
       <div className="form-actions">
-        <button type="reset">
-          <Trash weight="bold" />
-          Reset Form
-        </button>
         <button type="submit" className="primary">
           <PaperPlaneTilt weight="bold" />
           Register
+        </button>
+        <button type="reset">
+          <Trash weight="bold" />
+          Reset Form
         </button>
       </div>
     </form>

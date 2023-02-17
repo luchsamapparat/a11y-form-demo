@@ -76,7 +76,7 @@ input:focus {
 
 .form-actions {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
   gap: 0.5rem;
   width: calc(25rem + (var(--form-element-padding-x) * 2));
 }
