@@ -27,8 +27,8 @@ export default function Index() {
   const handleSubmit = async () => submit(registrationForm, { method: 'post' });
 
   return (<>
-    <div className="form">
-      <div className="title">Register</div>
+    <form>
+      <h1>Register</h1>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.firstName })}>
         <input type="text" name="firstName" placeholder="First Name" value={registrationForm.firstName ?? ''} onChange={onChangeHandler('firstName')} />
@@ -41,7 +41,7 @@ export default function Index() {
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.email })}>
-        <input type="text" name="email" placeholder="Email Address" value={registrationForm.email ?? ''} onChange={onChangeHandler('email')} />
+        <input type="email" name="email" placeholder="Email Address" value={registrationForm.email ?? ''} onChange={onChangeHandler('email')} />
         <div className="feedback">{fieldErrors?.email}</div>
       </div>
 
@@ -60,6 +60,6 @@ export default function Index() {
           Submit
         </button>
       </div>
-    </div>
+    </form>
   </>);
 }
