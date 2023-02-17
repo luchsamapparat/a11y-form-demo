@@ -3,6 +3,7 @@ import { redirect } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import classNames from "classnames";
 import { PaperPlaneTilt, Trash } from "phosphor-react";
+import type { FormEvent } from "react";
 import type { ValidationErrorResponseData } from 'remix-validated-form';
 import { validationError } from 'remix-validated-form';
 import { useFormState } from "~/form";
@@ -23,11 +24,17 @@ export default function Index() {
 
   const [registrationForm, onChangeHandler, reset] = useFormState<Partial<RegistrationFormData>>({});
 
-  const handleReset = async () => reset();
-  const handleSubmit = async () => submit(registrationForm, { method: 'post' });
+  const handleReset = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    reset();
+  };
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    submit(registrationForm, { method: 'post' });
+  };
 
   return (<>
-    <form>
+    <form onReset={handleReset} onSubmit={handleSubmit}>
       <h1>Register</h1>
 
       <p>Please fill out all form fields to complete your registration.</p>
@@ -53,11 +60,11 @@ export default function Index() {
       </div>
 
       <div className="form-actions">
-        <button type="button" onClick={handleReset}>
+        <button type="reset">
           <Trash weight="bold" />
           Reset Form
         </button>
-        <button type="button" className="primary" onClick={handleSubmit}>
+        <button type="submit" className="primary">
           <PaperPlaneTilt weight="bold" />
           Register
         </button>
