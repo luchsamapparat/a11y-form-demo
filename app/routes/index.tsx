@@ -30,6 +30,8 @@ export default function Index() {
     <form>
       <h1>Register</h1>
 
+      <p>Please fill out all form fields to complete your registration.</p>
+
       <div className={classNames('form-row', { 'has-error': fieldErrors?.firstName })}>
         <input type="text" name="firstName" placeholder="First Name" value={registrationForm.firstName ?? ''} onChange={onChangeHandler('firstName')} />
         <div className="feedback">{fieldErrors?.firstName}</div>
@@ -53,11 +55,11 @@ export default function Index() {
       <div className="form-actions">
         <button type="button" onClick={handleReset}>
           <Trash weight="bold" />
-          Reset
+          Reset Form
         </button>
         <button type="button" className="primary" onClick={handleSubmit}>
           <PaperPlaneTilt weight="bold" />
-          Submit
+          Register
         </button>
       </div>
     </form>
