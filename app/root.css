@@ -4,7 +4,7 @@
   --form-element-padding-y: 0.5rem;
   --form-element-border-color: #999999;
   --form-element-border-color-invalid: #dc3545;
-  --form-row-gap: 1rem;
+  --form-row-gap: 1.5rem;
   --button-color: #000000;
   --button-background-color: #f0f2f4;
   --button-hover-background-color: #d3d4d5;
@@ -91,7 +91,8 @@ input:focus {
 .form-actions {
   display: flex;
   flex-direction: row-reverse;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-top: 1rem;
   width: calc(25rem + (var(--form-element-padding-x) * 2));
 }
 
