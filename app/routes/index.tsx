@@ -1,14 +1,9 @@
 import type { ActionFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { useFetcher } from "@remix-run/react";
 import classNames from "classnames";
 import { PaperPlaneTilt, Trash } from "phosphor-react";
-import type { FormEvent } from "react";
 import { useId } from "react";
-import type { ValidationErrorResponseData } from 'remix-validated-form';
-import { validationError } from 'remix-validated-form';
-import { useFormState } from "~/form";
-import type { RegistrationFormData } from "~/registration";
+import { useFormContext, ValidatedForm, validationError } from 'remix-validated-form';
 import { validator } from "~/registration";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -20,24 +15,13 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const { data, submit } = useFetcher<ValidationErrorResponseData | undefined>();
-  const { fieldErrors } = data ?? {};
-
-  const [registrationForm, onChangeHandler, reset] = useFormState<Partial<RegistrationFormData>>({});
-
-  const handleReset = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    reset();
-  };
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    submit(registrationForm, { method: 'post' });
-  };
-
   const headingId = useId();
+  const formId = useId();
+
+  const { fieldErrors } = useFormContext(formId)
 
   return (<>
-    <form aria-labelledby={headingId} onReset={handleReset} onSubmit={handleSubmit}>
+    <ValidatedForm method="post" id={formId} aria-labelledby={headingId} validator={validator}>
       <h1 id={headingId}>Register</h1>
 
       <p>Please fill out all form fields to complete your registration.</p>
@@ -47,7 +31,7 @@ export default function Index() {
           First Name
           <div className="hint">Required</div>
         </label>
-        <input type="text" name="firstName" id="firstName" value={registrationForm.firstName ?? ''} onChange={onChangeHandler('firstName')} />
+        <input type="text" name="firstName" id="firstName" />
         <div className="feedback">{fieldErrors?.firstName}</div>
       </div>
 
@@ -56,7 +40,7 @@ export default function Index() {
           Last Name
           <div className="hint">Required</div>
         </label>
-        <input type="text" name="lastName" id="lastName" value={registrationForm.lastName ?? ''} onChange={onChangeHandler('lastName')} />
+        <input type="text" name="lastName" id="lastName" />
         <div className="feedback">{fieldErrors?.lastName}</div>
       </div>
 
@@ -65,7 +49,7 @@ export default function Index() {
           Email Address
           <div className="hint">Required</div>
         </label>
-        <input type="email" name="email" id="email" value={registrationForm.email ?? ''} onChange={onChangeHandler('email')} />
+        <input type="email" name="email" id="email" />
         <div className="feedback">{fieldErrors?.email}</div>
       </div>
 
@@ -75,7 +59,7 @@ export default function Index() {
           <div className="hint">Must contain 12+ characters<br />
             with at least 1 number and 1 uppercase letter.</div>
         </label>
-        <input type="password" name="password" id="password" value={registrationForm.password ?? ''} onChange={onChangeHandler('password')} />
+        <input type="password" name="password" id="password" />
         <div className="feedback">{fieldErrors?.password}</div>
       </div>
 
@@ -89,6 +73,6 @@ export default function Index() {
           Reset Form
         </button>
       </div>
-    </form>
+    </ValidatedForm>
   </>);
 }
