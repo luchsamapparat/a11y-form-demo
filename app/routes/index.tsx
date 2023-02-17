@@ -3,7 +3,7 @@ import { redirect } from "@remix-run/node";
 import classNames from "classnames";
 import { PaperPlaneTilt, Trash } from "phosphor-react";
 import { useId } from "react";
-import { useFormContext, ValidatedForm, validationError } from 'remix-validated-form';
+import { useField, useFormContext, ValidatedForm, validationError } from 'remix-validated-form';
 import { validator } from "~/registration";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -19,6 +19,10 @@ export default function Index() {
   const formId = useId();
 
   const { fieldErrors } = useFormContext(formId)
+  const firstName = useField('firstName', { formId });
+  const lastName = useField('lastName', { formId });
+  const email = useField('email', { formId });
+  const password = useField('password', { formId });
 
   return (<>
     <ValidatedForm method="post" id={formId} aria-labelledby={headingId} validator={validator}>
@@ -31,7 +35,7 @@ export default function Index() {
           First Name
           <div className="hint">Required</div>
         </label>
-        <input type="text" name="firstName" id="firstName" />
+        <input type="text" id="firstName" {...firstName.getInputProps()} />
         <div className="feedback">{fieldErrors?.firstName}</div>
       </div>
 
@@ -40,7 +44,7 @@ export default function Index() {
           Last Name
           <div className="hint">Required</div>
         </label>
-        <input type="text" name="lastName" id="lastName" />
+        <input type="text" id="lastName" {...lastName.getInputProps()} />
         <div className="feedback">{fieldErrors?.lastName}</div>
       </div>
 
@@ -49,7 +53,7 @@ export default function Index() {
           Email Address
           <div className="hint">Required</div>
         </label>
-        <input type="email" name="email" id="email" />
+        <input type="email" id="email" {...email.getInputProps()} />
         <div className="feedback">{fieldErrors?.email}</div>
       </div>
 
@@ -59,7 +63,7 @@ export default function Index() {
           <div className="hint">Must contain 12+ characters<br />
             with at least 1 number and 1 uppercase letter.</div>
         </label>
-        <input type="password" name="password" id="password" />
+        <input type="password" id="password" {...password.getInputProps()} />
         <div className="feedback">{fieldErrors?.password}</div>
       </div>
 
