@@ -53,6 +53,7 @@ input {
 
 input:focus {
   outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25)
 }
 
 .has-error input {
@@ -105,6 +106,7 @@ button:hover {
   border-color: var(--button-hover-background-color);
 }
 
+button:focus-visible,
 button:active {
   background-color: var(--button-active-background-color);
   border-color: var(--button-active-background-color);
@@ -114,6 +116,10 @@ button:focus {
   outline: 0;
 }
 
+button:focus-visible {
+  box-shadow: 0 0 0 0.25rem rgba(211, 212, 213, .5);
+}
+
 button.primary {
   background-color: var(--button-primary-background-color);
   border-color: var(--button-primary-background-color);
@@ -121,6 +127,7 @@ button.primary {
   color: var(--button-primary-color);
 }
 
+button.primary:focus-visible,
 button.primary:hover {
   background-color: var(--button-primary-hover-background-color);
   border-color: var(--button-primary-hover-background-color);
@@ -133,4 +140,8 @@ button.primary:active {
 
 button.primary:focus {
   outline: 0;
+}
+
+button.primary:focus-visible {
+  box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, .5);
 }
