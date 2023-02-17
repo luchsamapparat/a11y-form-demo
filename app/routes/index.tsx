@@ -43,22 +43,26 @@ export default function Index() {
       <p>Please fill out all form fields to complete your registration.</p>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.firstName })}>
-        <input type="text" name="firstName" placeholder="First Name" value={registrationForm.firstName ?? ''} onChange={onChangeHandler('firstName')} />
+        <label htmlFor="firstName">First Name</label>
+        <input type="text" name="firstName" id="firstName" value={registrationForm.firstName ?? ''} onChange={onChangeHandler('firstName')} />
         <div className="feedback">{fieldErrors?.firstName}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.lastName })}>
-        <input type="text" name="lastName" placeholder="Last Name" value={registrationForm.lastName ?? ''} onChange={onChangeHandler('lastName')} />
+        <label htmlFor="lastName">Last Name</label>
+        <input type="text" name="lastName" id="lastName" value={registrationForm.lastName ?? ''} onChange={onChangeHandler('lastName')} />
         <div className="feedback">{fieldErrors?.lastName}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.email })}>
-        <input type="email" name="email" placeholder="Email Address" value={registrationForm.email ?? ''} onChange={onChangeHandler('email')} />
+        <label htmlFor="email">Email Address</label>
+        <input type="email" name="email" id="email" value={registrationForm.email ?? ''} onChange={onChangeHandler('email')} />
         <div className="feedback">{fieldErrors?.email}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.password })}>
-        <input type="password" name="password" placeholder="Password" value={registrationForm.password ?? ''} onChange={onChangeHandler('password')} />
+        <label htmlFor="password">Password</label>
+        <input type="password" name="password" id="password" value={registrationForm.password ?? ''} onChange={onChangeHandler('password')} />
         <div className="feedback">{fieldErrors?.password}</div>
       </div>
 

@@ -37,7 +37,15 @@ form {
 
 .form-row {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  display: block;
+  padding-left: var(--form-element-padding-x);
+  padding-right: var(--form-element-padding-x);
+  font-weight: bold;
 }
 
 input {
@@ -62,16 +70,14 @@ input:focus {
 
 .feedback {
   display: none;
+  padding-left: var(--form-element-padding-x);
+  padding-right: var(--form-element-padding-x);
+  font-size: 0.75rem;
 }
 
 .has-error .feedback {
   display: block;
-  padding-left: var(--form-element-padding-x);
-  padding-right: var(--form-element-padding-x);
-  padding-top: var(--form-element-padding-y);
-  padding-bottom: var(--form-element-padding-y);
   color: var(--form-element-border-color-invalid);
-  font-size: 0.75rem;
 }
 
 .form-actions {
