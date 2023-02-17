@@ -61,7 +61,11 @@ export default function Index() {
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.password })}>
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">
+          Password
+          <div className="hint">Must contain 12+ characters<br />
+            with at least 1 number and 1 uppercase letter.</div>
+        </label>
         <input type="password" name="password" id="password" value={registrationForm.password ?? ''} onChange={onChangeHandler('password')} />
         <div className="feedback">{fieldErrors?.password}</div>
       </div>

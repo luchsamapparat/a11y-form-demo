@@ -42,10 +42,18 @@ form {
 }
 
 label {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   padding-left: var(--form-element-padding-x);
   padding-right: var(--form-element-padding-x);
   font-weight: bold;
+}
+
+label .hint {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: normal;
 }
 
 input {
