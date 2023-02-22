@@ -86,6 +86,8 @@ button {
   color: var(--button-color);
   border-radius: 0.25rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   font-size: var(--font-size-base);
   padding-left: var(--form-element-padding-x);
   padding-right: var(--form-element-padding-x);
@@ -95,10 +97,7 @@ button {
 
 button svg {
   font-size: calc(var(--font-size-base) * 1.5);
-  position: relative;
-  top: 2px;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 button:hover {

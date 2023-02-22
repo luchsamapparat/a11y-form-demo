@@ -53,9 +53,11 @@ export default function Index() {
       <div className="form-actions">
         <button type="button" onClick={handleReset}>
           <Trash weight="bold" />
+          Reset
         </button>
         <button type="button" className="primary" onClick={handleSubmit}>
           <PaperPlaneTilt weight="bold" />
+          Submit
         </button>
       </div>
     </div>
