@@ -57,16 +57,16 @@ export default function Index() {
         <label htmlFor="password">Password<span className="required" title="Required" aria-hidden>*</span></label>
         <input type="password" id="password" {...password.getInputProps()} aria-required="true" aria-invalid={!isUndefined(fieldErrors?.password)} aria-describedby="passwordHint passwordFeedback" />
         <div className="feedback" id="passwordFeedback">{fieldErrors?.password}</div>
-        <div className="hint" id="passwordHint">Your password must contain 12+ characters with at least 1 number and 1 uppercase letter.</div>
+        <div className="hint" id="passwordHint">Your password must contain 12+ characters with at least 1 number and 1 uppercase letter</div>
       </div>
 
       <div className="form-actions">
         <button type="submit" className="primary">
-          <PaperPlaneTilt weight="bold" />
+          <PaperPlaneTilt weight="bold" aria-hidden />
           Register
         </button>
         <button type="reset">
-          <Trash weight="bold" />
+          <Trash weight="bold" aria-hidden />
           Reset Form
         </button>
       </div>
