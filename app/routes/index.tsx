@@ -50,7 +50,7 @@ export default function Index() {
       <div className={classNames('form-row', { 'has-error': fieldErrors?.email })}>
         <label htmlFor="email">Email Address<span className="required" title="Required" aria-hidden>*</span></label>
         <input type="email" id="email" {...email.getInputProps()} aria-required="true" aria-invalid={!isUndefined(fieldErrors?.email)} aria-describedby="emailFeedback" />
-        <div className="feedback" id="emailFeedback">{fieldErrors?.email}</div>
+        <div className="feedback" id="emailFeedback" dangerouslySetInnerHTML={{ __html: fieldErrors?.email }}></div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.password })}>
