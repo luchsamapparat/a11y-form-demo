@@ -1,8 +1,10 @@
 import type { ActionFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import classNames from "classnames";
+import { isEmpty, isUndefined, keys } from "lodash-es";
 import { PaperPlaneTilt, Trash } from "phosphor-react";
 import { useId } from "react";
+import type { FieldErrors } from 'remix-validated-form';
 import { useField, useFormContext, ValidatedForm, validationError } from 'remix-validated-form';
 import { validator } from "~/registration";
 
@@ -18,7 +20,7 @@ export default function Index() {
   const headingId = useId();
   const formId = useId();
 
-  const { fieldErrors } = useFormContext(formId)
+  const { fieldErrors, hasBeenSubmitted } = useFormContext(formId)
   const firstName = useField('firstName', { formId });
   const lastName = useField('lastName', { formId });
   const email = useField('email', { formId });
@@ -29,42 +31,33 @@ export default function Index() {
       <h1 id={headingId}>Register</h1>
 
       <p>Please fill out all form fields to complete your registration.</p>
+      <p className="legend" aria-hidden="true">Fields marked with a <strong className="required">*</strong> are required.</p>
+
+      {hasBeenSubmitted ? (<p className="global-error" aria-live="assertive">{getGlobalErrorMessage(fieldErrors)}</p>) : null}
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.firstName })}>
-        <label htmlFor="firstName">
-          First Name
-          <div className="hint">Required</div>
-        </label>
-        <input type="text" id="firstName" {...firstName.getInputProps()} />
-        <div className="feedback">{fieldErrors?.firstName}</div>
+        <label htmlFor="firstName">First Name<span className="required" title="Required" aria-hidden>*</span></label>
+        <input type="text" id="firstName" {...firstName.getInputProps()} aria-required="true" aria-invalid={!isUndefined(fieldErrors?.firstName)} aria-describedby="firstNameFeedback" />
+        <div className="feedback" id="firstNameFeedback">{fieldErrors?.firstName}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.lastName })}>
-        <label htmlFor="lastName">
-          Last Name
-          <div className="hint">Required</div>
-        </label>
-        <input type="text" id="lastName" {...lastName.getInputProps()} />
-        <div className="feedback">{fieldErrors?.lastName}</div>
+        <label htmlFor="lastName">Last Name<span className="required" title="Required" aria-hidden>*</span></label>
+        <input type="text" id="lastName" {...lastName.getInputProps()} aria-required="true" aria-invalid={!isUndefined(fieldErrors?.lastName)} aria-describedby="lastNameFeedback" />
+        <div className="feedback" id="lastNameFeedback">{fieldErrors?.lastName}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.email })}>
-        <label htmlFor="email">
-          Email Address
-          <div className="hint">Required</div>
-        </label>
-        <input type="email" id="email" {...email.getInputProps()} />
-        <div className="feedback">{fieldErrors?.email}</div>
+        <label htmlFor="email">Email Address<span className="required" title="Required" aria-hidden>*</span></label>
+        <input type="email" id="email" {...email.getInputProps()} aria-required="true" aria-invalid={!isUndefined(fieldErrors?.email)} aria-describedby="emailFeedback" />
+        <div className="feedback" id="emailFeedback">{fieldErrors?.email}</div>
       </div>
 
       <div className={classNames('form-row', { 'has-error': fieldErrors?.password })}>
-        <label htmlFor="password">
-          Password
-          <div className="hint">Must contain 12+ characters<br />
-            with at least 1 number and 1 uppercase letter.</div>
-        </label>
-        <input type="password" id="password" {...password.getInputProps()} />
-        <div className="feedback">{fieldErrors?.password}</div>
+        <label htmlFor="password">Password<span className="required" title="Required" aria-hidden>*</span></label>
+        <input type="password" id="password" {...password.getInputProps()} aria-required="true" aria-invalid={!isUndefined(fieldErrors?.password)} aria-describedby="passwordHint passwordFeedback" />
+        <div className="feedback" id="passwordFeedback">{fieldErrors?.password}</div>
+        <div className="hint" id="passwordHint">Your password must contain 12+ characters with at least 1 number and 1 uppercase letter.</div>
       </div>
 
       <div className="form-actions">
@@ -79,4 +72,16 @@ export default function Index() {
       </div>
     </ValidatedForm>
   </>);
+}
+
+const getGlobalErrorMessage = (fieldErrors: FieldErrors) => {
+  if (isEmpty(fieldErrors)) {
+    return null;
+  }
+
+  if (keys(fieldErrors).length === 1) {
+    return "Failed to submit registration because one field has an error.";
+  } else {
+    return `Failed to submit registration because ${keys(fieldErrors).length} fields have errors.`;
+  }
 }

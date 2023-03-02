@@ -13,6 +13,8 @@
   --button-primary-background-color: #0d6efd;
   --button-primary-hover-background-color: #0b5ed7;
   --button-primary-active-background-color: #0a58ca;
+  --text-color-secondary: #555555;
+  --text-color-error: #bf2231;
 }
 
 body {
@@ -29,6 +31,10 @@ h1 {
   margin-bottom: 0;
 }
 
+p {
+  margin: 0;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -42,18 +48,23 @@ form {
 }
 
 label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
   padding-left: var(--form-element-padding-x);
   padding-right: var(--form-element-padding-x);
   font-weight: bold;
 }
 
-label .hint {
-  display: block;
+.required {
+  display: inline-block;
+  margin-inline-start: 0.125rem;
+  color: var(--text-color-secondary);
+}
+
+.legend {
   font-size: 0.9rem;
-  font-weight: normal;
+}
+
+.legend .required {
+  margin-inline-start: 0;
 }
 
 input {
@@ -76,16 +87,27 @@ input:focus {
   border: 1px solid var(--form-element-border-color-invalid);
 }
 
-.feedback {
-  display: none;
+.hint {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: normal;
   padding-left: var(--form-element-padding-x);
   padding-right: var(--form-element-padding-x);
-  font-size: 0.75rem;
+  width: 25rem;
 }
 
+.feedback {
+  display: none;
+  font-size: 0.9rem;
+  padding-left: var(--form-element-padding-x);
+  padding-right: var(--form-element-padding-x);
+  width: 25rem;
+}
+
+.global-error,
 .has-error .feedback {
   display: block;
-  color: var(--form-element-border-color-invalid);
+  color: var(--text-color-error);
 }
 
 .form-actions {
